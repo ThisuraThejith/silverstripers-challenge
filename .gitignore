@@ -1,0 +1,9 @@
+.idea
+/app/silverstripers-project/silverstripe-cache/
+/app/silverstripers-project/.env
+/app/silverstripers-project/vendor/
+/app/silverstripers-project/themes/simple/
+/app/silverstripers-project/_resources/
+/app/silverstripers-project/public/_resources/
+/app/silverstripers-project/.graphql-generated/
+/app/silverstripers-project/public/_graphql/

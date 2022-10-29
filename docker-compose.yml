@@ -1,0 +1,43 @@
+version: "3.2"
+
+services:
+  silverstripers_php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - ./app/:/app
+    container_name: silverstripers_php
+
+  silverstripers_nginx:
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./app/:/app
+      - ./nginx/site.conf:/etc/nginx/conf.d/default.conf
+    container_name: silverstripers_nginx
+    links:
+      - silverstripers_php
+
+  silverstripers_mysql:
+    image: mysql:8.0.24
+    ports:
+      - 3306:3306
+    volumes:
+      - silverstripers-mysql:/var/lib/mysql
+    container_name: silverstripers_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: silverstripers_mysql
+
+  silverstripers_adminer:
+    image: adminer
+    ports:
+      - 9001:8080
+    container_name: silverstripers_adminer
+
+volumes:
+  silverstripers-mysql:
